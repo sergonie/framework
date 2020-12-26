@@ -43,7 +43,7 @@ final class HttpApplicationTest extends TestCase
 
         self::assertInstanceOf(ResponseInterface::class, $response);
         self::assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
-        self::assertContains('No route matches requested uri', (string) $response->getBody());
+        self::assertStringContainsString('No route matches requested uri', (string) $response->getBody());
     }
 
     public function testProcessRequestWithClosures(): void
@@ -95,7 +95,7 @@ final class HttpApplicationTest extends TestCase
 
         self::assertInstanceOf(ResponseInterface::class, $response);
         self::assertSame(Response::HTTP_I_AM_A_TEAPOT, $response->getStatusCode());
-        self::assertContains('Override exception', (string) $response->getBody());
+        self::assertStringContainsString('Override exception', (string) $response->getBody());
 
     }
 
