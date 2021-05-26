@@ -6,3 +6,4 @@
 /coverage.clover
 /coverage
 /tests/.phpunit.result.cache
+.phpunit.result.cache
