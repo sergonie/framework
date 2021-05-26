@@ -53,7 +53,7 @@ class Config
     {
         $result = $this->config;
         $keys = explode('.', $key);
-        if ($keys === false) {
+        if (!is_array($keys)) {
             return null;
         }
 
@@ -116,14 +116,14 @@ class Config
      * Sets new value.
      *
      * @param string $key
-     * @param $value
+     * @param mixed $value
      *
      * @todo: duplicate. optimize me
      */
     public function set(string $key, $value): void
     {
         $keys = explode('.', $key);
-        if ($keys === false) {
+        if (!is_array($keys)) {
             return;
         }
 

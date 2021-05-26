@@ -2,6 +2,7 @@
 
 namespace Sergonie\Application;
 
+use Psr\Container\ContainerInterface;
 use Sergonie\Application\Exception\ApplicationException;
 use Sergonie\Application\Http\MiddlewareAggregator;
 use Sergonie\Application\Listeners\OnBootListener;
@@ -13,7 +14,6 @@ use Sergonie\Application\Providers\ControllerProvider;
 use Sergonie\Application\Providers\ServiceProvider;
 use Sergonie\Container\DependencyResolver;
 use Sergonie\Container\ServiceLocator;
-use Psr\Container\ContainerInterface;
 use Throwable;
 
 /**
@@ -152,7 +152,11 @@ abstract class Application
     }
 
     /**
-     * @param object|string $module
+     * @param  object|string  $module
+     *
+     * @throws \ReflectionException
+     * @todo: get rid of pointer
+     *
      */
     protected function initializeModule(&$module): void
     {

@@ -2,9 +2,9 @@
 
 namespace Sergonie\Application\Http;
 
-use Sergonie\Network\Http\Router;
 use Sergonie\Network\Exception\RouterException;
 use Sergonie\Network\Http\Route;
+use Sergonie\Network\Http\Router;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException as SymfonyMethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -34,10 +34,9 @@ class GenericRouter implements Router
      */
     public function add(Route $route): void
     {
-        $name = $route instanceof Route
-            ? Route::generateNameFromPath($route->getPath(), $route->getMethods())
-            : $route->getName();
-
+        $name = Route::generateNameFromPath(
+            $route->getPath(), $route->getMethods()
+        );
         $baseRoute = new SymfonyRoute($route->getPath());
         $baseRoute->setMethods($route->getMethods());
 
