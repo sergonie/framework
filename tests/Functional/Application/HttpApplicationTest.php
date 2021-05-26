@@ -246,30 +246,6 @@ final class HttpApplicationTest extends TestCase
         self::assertTrue($onBoot->dispatched);
     }
 
-    /**
-     * @dataProvider provideTestRoutes
-     */
-    public function testRoutes(string $type, string $requestMethod): void
-    {
-
-        $application = new HttpApplication();
-        $application->$type('/test/{name}', function(ServerRequest $request): Response {
-            return Response::asText("Test passes: {$request->getAttribute('name')}");
-        });
-        $application->startup();
-        $response = $application->handle(new ServerRequest('/test/OK', $requestMethod));
-
-        self::assertSame(Response::HTTP_OK, $response->getStatusCode());
-        self::assertSame('Test passes: OK', (string) $response->getBody());
-    }
-
-    public function testGetControllerAggregator(): void
-    {
-        $application = new HttpApplication();
-
-        self::assertInstanceOf(ControllerAggregator::class, $application->getControllerAggregator());
-    }
-
     public function provideTestRoutes(): array
     {
         return [
@@ -281,5 +257,29 @@ final class HttpApplicationTest extends TestCase
             ['options', Request::METHOD_OPTIONS],
             ['head', Request::METHOD_HEAD],
         ];
+    }
+
+    /**
+     * @dataProvider provideTestRoutes
+     */
+    public function testRoutes(string $type, string $requestMethod): void
+    {
+        $application = new HttpApplication();
+        $application->$type('/test/{name}', function(ServerRequest $request): Response {
+            return Response::asText("Test passes: {$request->getAttribute('name')}");
+        });
+        $application->startup();
+
+        $response = $application->handle(new ServerRequest('/test/OK', $requestMethod));
+
+        self::assertSame(Response::HTTP_OK, $response->getStatusCode());
+        self::assertSame('Test passes: OK', (string) $response->getBody());
+    }
+
+    public function testGetControllerAggregator(): void
+    {
+        $application = new HttpApplication();
+
+        self::assertInstanceOf(ControllerAggregator::class, $application->getControllerAggregator());
     }
 }

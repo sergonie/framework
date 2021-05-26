@@ -26,27 +26,15 @@ abstract class Application
     /**
      * @var ServiceLocator|ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
+    protected DependencyResolver $resolver;
+    private Config $config;
+    private bool $initialized = false;
 
     /**
-     * @var Config
+     * @var object[]|string[]
      */
-    private $config;
-
-    /**
-     * @var bool
-     */
-    private $initialized = false;
-
-    /**
-     * @var object[]|class[]
-     */
-    protected $modules;
-
-    /**
-     * @var DependencyResolver
-     */
-    protected $resolver;
+    protected array $modules = [];
 
     /**
      * Application constructor.
@@ -55,31 +43,23 @@ abstract class Application
      */
     public function __construct(ContainerInterface $container = null)
     {
-        if ($container === null) {
-            $container = new ServiceLocator();
-        }
-
-        $this->container = $container;
+        $this->container = $container ?? new ServiceLocator();
         $this->resolver = new DependencyResolver($this->container);
 
-        if ($this->container->has(Config::class)) {
-            $this->config = $this->container->get(Config::class);
-        } else {
-            $this->config = new Config([]);
-        }
-
-        $this->modules = [];
+        $this->config = $this->container->has(Config::class)
+            ? $this->container->get(Config::class)
+            : new Config([]);
     }
 
     /**
      * Allows for application extension by modules.
      * Module can be any valid object or class name.
      *
-     * @param $module
+     * @param object|string $module
      */
     public function extend($module): void
     {
-        if (is_object($module) || class_exists($module)) {
+        if (is_object($module) || (is_string($module) && class_exists($module))) {
             $this->modules[] = $module;
         } else {
             throw ApplicationException::forInvalidModule($module);
@@ -106,9 +86,6 @@ abstract class Application
      */
     abstract public function getMiddlewareAggregator(): MiddlewareAggregator;
 
-    /**
-     * @return Config
-     */
     public function getConfig(): Config
     {
         return $this->config;
@@ -119,6 +96,7 @@ abstract class Application
         return $this->container;
     }
 
+    /** @todo: get rid of iterating over all modules */
     protected function handleOnBootListeners(): void
     {
         foreach ($this->modules as $module) {
@@ -128,6 +106,7 @@ abstract class Application
         }
     }
 
+    /** @todo: get rid of iterating over all modules */
     protected function handleOnShutDownListeners(): void
     {
         foreach ($this->modules as $module) {
@@ -137,6 +116,7 @@ abstract class Application
         }
     }
 
+    /** @todo: get rid of iterating over all modules */
     protected function handleOnErrorListeners(Throwable $exception): Throwable
     {
         foreach ($this->modules as $module) {
@@ -148,6 +128,7 @@ abstract class Application
         return $exception;
     }
 
+    /** @todo: get rid of iterating over all modules */
     protected function handleOnRunListeners(): void
     {
         foreach ($this->modules as $module) {
@@ -170,6 +151,9 @@ abstract class Application
         $this->initialized = true;
     }
 
+    /**
+     * @param object|string $module
+     */
     protected function initializeModule(&$module): void
     {
         if (is_string($module)) {

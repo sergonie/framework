@@ -18,14 +18,14 @@ use Igni\Network\Http\ServerRequest;
 use Igni\Network\Server\Client;
 use Igni\Network\Server\HttpServer;
 use Igni\Network\Server\OnRequestListener;
+use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
+use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
-use Zend\HttpHandlerRunner\Emitter\EmitterInterface;
-use Zend\HttpHandlerRunner\Emitter\SapiEmitter;
 
 /**
  * @package Igni\Application
@@ -37,25 +37,14 @@ class HttpApplication extends Application implements
     RequestHandlerInterface,
     OnRequestListener
 {
-    /**
-     * @var Router
-     */
-    private $router;
+    private Router $router;
+    private EmitterInterface $emitter;
+    private ?MiddlewarePipe $pipeline = null;
 
     /**
      * @var string[]|MiddlewareInterface[]
      */
-    private $middleware = [];
-
-    /**
-     * @var MiddlewarePipe
-     */
-    private $pipeline;
-
-    /**
-     * @var EmitterInterface
-     */
-    private $emitter;
+    private array $middleware = [];
 
     /**
      * Application constructor.
@@ -66,17 +55,13 @@ class HttpApplication extends Application implements
     {
         parent::__construct($container);
 
-        if ($this->getContainer()->has(Router::class)) {
-            $this->router = $this->getContainer()->get(Router::class);
-        } else {
-            $this->router = new GenericRouter();
-        }
+        $this->router = $this->getContainer()->has(Router::class)
+            ? $this->getContainer()->get(Router::class)
+            : new GenericRouter();
 
-        if ($this->getContainer()->has(EmitterInterface::class)) {
-            $this->emitter = $this->getContainer()->get(EmitterInterface::class);
-        } else {
-            $this->emitter = new SapiEmitter();
-        }
+        $this->emitter = $this->getContainer()->has(EmitterInterface::class)
+            ? $this->getContainer()->get(EmitterInterface::class)
+            : new SapiEmitter();
     }
 
     /**
@@ -107,9 +92,10 @@ class HttpApplication extends Application implements
     public function run(HttpServer $server = null): void
     {
         $this->startup();
-        if ($server) {
+        if (!is_null($server)) {
             $server->addListener($this);
             $server->start();
+
         } else {
             $response = $this->handle(ServerRequest::fromGlobals());
             $this->emitter->emit($response);
@@ -144,27 +130,32 @@ class HttpApplication extends Application implements
         $this->middleware[] = $middleware;
     }
 
+    /**
+     * @param  callable|\Igni\Application\Controller|string  $controller
+     * @param  \Igni\Network\Http\Route|null  $route
+     */
     public function register($controller, Route $route = null): void
     {
-        if (is_callable($controller) && $route !== null) {
+        if (is_callable($controller) && !is_null($route)) {
             $route = $route->withController($controller);
             $this->router->add($route);
+
             return;
         }
 
         if ($controller instanceof Controller) {
-            /** @var Route $route */
             $route = $controller::getRoute();
             $route = $route->withController($controller);
             $this->router->add($route);
+
             return;
         }
 
         if (is_string($controller) && is_subclass_of($controller, Controller::class)) {
-            /** @var Route $route */
             $route = $controller::getRoute();
             $route = $route->withController($controller);
             $this->router->add($route);
+
             return;
         }
 
@@ -223,9 +214,7 @@ class HttpApplication extends Application implements
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $response = $this->getMiddlewarePipe()->handle($request);
-
-        return $response;
+        return $this->getMiddlewarePipe()->handle($request);
     }
 
     /**
@@ -360,7 +349,7 @@ class HttpApplication extends Application implements
 
     protected function getMiddlewarePipe(): MiddlewarePipe
     {
-        if ($this->pipeline) {
+        if (!is_null($this->pipeline)) {
             return $this->pipeline;
         }
 

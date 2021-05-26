@@ -20,10 +20,7 @@ use Igni\Application\Exception\ConfigException;
  */
 class Config
 {
-    /**
-     * @var array
-     */
-    private $config;
+    private array $config;
 
     /**
      * Config constructor.
@@ -46,11 +43,21 @@ class Config
         return $this->lookup($key) !== null;
     }
 
+    /**
+     * @todo: optimize me
+     * @param  string  $key
+     *
+     * @return array|mixed|null
+     */
     private function lookup(string $key)
     {
         $result = $this->config;
-        $key = explode('.', $key);
-        foreach($key as $part) {
+        $keys = explode('.', $key);
+        if ($keys === false) {
+            return null;
+        }
+
+        foreach($keys as $part) {
             if (!is_array($result) || !isset($result[$part])) {
                 return null;
             }
@@ -70,7 +77,8 @@ class Config
     public function get(string $key, $default = null)
     {
         $result = $this->lookup($key);
-        return $result === null ? $default : $this->fetchConstants($result);
+
+        return is_null($result) ? $default : $this->fetchConstants($result);
     }
 
     /**
@@ -109,14 +117,20 @@ class Config
      *
      * @param string $key
      * @param $value
+     *
+     * @todo: duplicate. optimize me
      */
     public function set(string $key, $value): void
     {
-        $key = explode('.', $key);
-        $last = array_pop($key);
+        $keys = explode('.', $key);
+        if ($keys === false) {
+            return;
+        }
+
+        $last = array_pop($keys);
         $result = &$this->config;
 
-        foreach ($key as $part) {
+        foreach ($keys as $part) {
             if (!isset($result[$part]) || !is_array($result[$part])) {
                 $result[$part] = [];
             }
@@ -146,6 +160,7 @@ class Config
         return self::flatten($this->config);
     }
 
+    /** @todo: optimize me */
     private static function flatten(array &$array, string $prefix = ''): array
     {
         $values = [];
@@ -167,7 +182,7 @@ class Config
         }
         return preg_replace_callback(
             '#\$\{([^{}]*)\}#',
-            function($matches) {
+            static function ($matches) {
                 if (defined($matches[1])) {
                     return constant($matches[1]);
                 }

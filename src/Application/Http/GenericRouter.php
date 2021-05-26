@@ -19,11 +19,10 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class GenericRouter implements Router
 {
-    /** @var RouteCollection */
-    protected $routeCollection;
+    protected RouteCollection $routeCollection;
 
     /** @var Route[] */
-    protected $routes = [];
+    protected array $routes = [];
 
     public function __construct()
     {
@@ -32,16 +31,12 @@ class GenericRouter implements Router
 
     /**
      * Registers new route.
-     *
-     * @param Route $route
      */
     public function add(Route $route): void
     {
-        if ($route instanceof Route) {
-            $name = $route->getName();
-        } else {
-            $name = Route::generateNameFromPath($route->getPath());
-        }
+        $name = $route instanceof Route
+            ? Route::generateNameFromPath($route->getPath(), $route->getMethods())
+            : $route->getName();
 
         $baseRoute = new SymfonyRoute($route->getPath());
         $baseRoute->setMethods($route->getMethods());
@@ -62,8 +57,10 @@ class GenericRouter implements Router
         $matcher = new UrlMatcher($this->routeCollection, new RequestContext('/', $method));
         try {
             $route = $matcher->match($path);
+
         } catch (ResourceNotFoundException $exception) {
             throw RouterException::noRouteMatchesRequestedUri($path, $method);
+
         } catch (SymfonyMethodNotAllowedException $exception) {
             throw RouterException::methodNotAllowed($path, $exception->getAllowedMethods());
         }
