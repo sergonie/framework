@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application;
+namespace Sergonie\Application;
 
-use Igni\Application\Exception\ApplicationException;
-use Igni\Application\Http\MiddlewareAggregator;
-use Igni\Application\Listeners\OnBootListener;
-use Igni\Application\Listeners\OnErrorListener;
-use Igni\Application\Listeners\OnRunListener;
-use Igni\Application\Listeners\OnShutDownListener;
-use Igni\Application\Providers\ConfigProvider;
-use Igni\Application\Providers\ControllerProvider;
-use Igni\Application\Providers\ServiceProvider;
+use Sergonie\Application\Exception\ApplicationException;
+use Sergonie\Application\Http\MiddlewareAggregator;
+use Sergonie\Application\Listeners\OnBootListener;
+use Sergonie\Application\Listeners\OnErrorListener;
+use Sergonie\Application\Listeners\OnRunListener;
+use Sergonie\Application\Listeners\OnShutDownListener;
+use Sergonie\Application\Providers\ConfigProvider;
+use Sergonie\Application\Providers\ControllerProvider;
+use Sergonie\Application\Providers\ServiceProvider;
 use Sergonie\Container\DependencyResolver;
 use Sergonie\Container\ServiceLocator;
 use Psr\Container\ContainerInterface;
@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Main glue between all components.
  *
- * @package Igni\Application
+ * @package Sergonie\Application
  */
 abstract class Application
 {

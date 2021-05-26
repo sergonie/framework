@@ -1,7 +1,7 @@
 <?php
 namespace Examples\Controllers;
 
-use Igni\Application\Http\Controller;
+use Sergonie\Application\Http\Controller;
 use Sergonie\Network\Http\Response;
 use Sergonie\Network\Http\Route;
 use Psr\Http\Message\ResponseInterface;

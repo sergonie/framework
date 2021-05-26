@@ -1,10 +1,9 @@
-# ![Igni logo](https://github.com/igniphp/common/blob/master/logo/full.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Build Status](https://travis-ci.org/igniphp/framework.svg?branch=master)](https://travis-ci.org/igniphp/framework)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/igniphp/framework/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/igniphp/framework/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/igniphp/framework/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/igniphp/framework/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sergonie/framework/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sergonie/framework/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/sergonie/framework/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sergonie/framework/?branch=master)
 
-Igni is a php7 anti-framework with built-in [swoole server](https://www.swoole.co.uk) and modular architecture support to 
+Sergonie is a php7 anti-framework with built-in [swoole server](https://www.swoole.co.uk) and modular architecture support to 
 help you quickly write scalable PSR-7 and PSR-15 compilant REST services.
 
 Its main objective it to be as much transparent and as less visible for your application as possible.
@@ -13,11 +12,11 @@ Its main objective it to be as much transparent and as less visible for your app
 <?php
 require 'vendor/autoload.php';
 
-use Igni\Application\Config;
-use Igni\Application\HttpApplication;
-use Igni\Application\Providers\ConfigProvider;
-use Igni\Network\Http\Response;
-use Igni\Network\Http\Request;
+use Sergonie\Application\Config;
+use Sergonie\Application\HttpApplication;
+use Sergonie\Application\Providers\ConfigProvider;
+use Sergonie\Network\Http\Response;
+use Sergonie\Network\Http\Request;
 
 $application = new HttpApplication();
 
@@ -44,14 +43,14 @@ $application->run();
 
 ## Installation and requirements
 
-Recommended installation way of the Igni Framework is with composer:
+Recommended installation way of the Sergonie Framework is with composer:
 
 ``` 
-composer install igniphp/framework
+composer install sergonie/framework
 ```
 
 Requirements:
- - php 7.1 or better
+ - php 7.4 or better
  - [swoole](https://github.com/swoole/swoole-src) extension for build-in http server support
 
 ### What's new
@@ -60,21 +59,21 @@ With version 2.0 network package was extracted from the framework code, error ha
 overall improved as well as Server's listeners. More details can be found in changelog file.
 
 ### Quick start
-Alternatively you can start using framework with [quick start](https://github.com/igniphp/framework-quick-start) which contains bootstrap application.
+Alternatively you can start using framework with [quick start](https://github.com/sergonie/framework-quick-start) which contains bootstrap application.
 
 ## Features
 
 ### Routing
 
-Igni router is based on very fast symfony routing library.
+Sergonie router is based on very fast symfony routing library.
 
 ### PSR-7, PSR-15 Support
 
-Igni fully supports PSR message standards for both manipulating http response, request and http middlwares.
+Sergonie fully supports PSR message standards for both manipulating http response, request and http middlwares.
 
 ### Dependency Injection and Autoresolving
 
-Igni autoresolves dependencies for you and provides intuitive dependency container. 
+Sergonie autoresolves dependencies for you and provides intuitive dependency container. 
 It also allows you to use any PSR compatible container of your choice.
 
 ### Modular architecture
@@ -89,7 +88,7 @@ No nginx nor apache is required when `swoole` is installed, application can be r
 php examples/build_in_server_example.php
  ```
  
-Igni's http server is as fast as express.js application with almost 0 configuration. 
+Sergonie's http server is as fast as express.js application with almost 0 configuration. 
 
 ### Detailed documentation
 

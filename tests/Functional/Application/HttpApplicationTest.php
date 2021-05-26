@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Tests\Functional\Application;
+namespace Sergonie\Tests\Functional\Application;
 
 use Exception;
-use Igni\Application\Application;
-use Igni\Application\ControllerAggregator;
-use Igni\Application\Exception\ApplicationException;
-use Igni\Application\HttpApplication;
-use Igni\Application\Listeners\OnBootListener;
-use Igni\Application\Listeners\OnErrorListener;
-use Igni\Application\Listeners\OnRunListener;
-use Igni\Application\Listeners\OnShutDownListener;
+use Sergonie\Application\Application;
+use Sergonie\Application\ControllerAggregator;
+use Sergonie\Application\Exception\ApplicationException;
+use Sergonie\Application\HttpApplication;
+use Sergonie\Application\Listeners\OnBootListener;
+use Sergonie\Application\Listeners\OnErrorListener;
+use Sergonie\Application\Listeners\OnRunListener;
+use Sergonie\Application\Listeners\OnShutDownListener;
 use Sergonie\Container\ServiceLocator;
 use Sergonie\Network\Exception\HttpException;
 use Sergonie\Network\Http\Request;
@@ -19,7 +19,7 @@ use Sergonie\Network\Http\Route;
 use Sergonie\Network\Http\Router;
 use Sergonie\Network\Http\ServerRequest;
 use Sergonie\Network\Http\Stream;
-use Igni\Tests\Fixtures\HttpController;
+use Sergonie\Tests\Fixtures\HttpController;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;

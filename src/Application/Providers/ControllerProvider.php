@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Providers;
+namespace Sergonie\Application\Providers;
 
-use Igni\Application\ControllerAggregator;
+use Sergonie\Application\ControllerAggregator;
 
 /**
  * Can be implemented by module to register controllers in the application scope.
  *
- * @package Igni\Application\Providers
+ * @package Sergonie\Application\Providers
  */
 interface ControllerProvider
 {

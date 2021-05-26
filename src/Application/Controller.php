@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application;
+namespace Sergonie\Application;
 
 /**
  * Represents generic application's controller.
@@ -8,7 +8,7 @@ namespace Igni\Application;
  * Because php does not support generic types, empty interface should be good enough
  * to provide consistency in the application flow for controller handling.
  *
- * @package Igni\Application
+ * @package Sergonie\Application
  */
 interface Controller
 {

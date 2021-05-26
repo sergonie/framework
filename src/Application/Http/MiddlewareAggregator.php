@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Http;
+namespace Sergonie\Application\Http;
 
 use Psr\Http\Server\MiddlewareInterface;
 
 /**
  * Used by http application.
  *
- * @package Igni\Application
+ * @package Sergonie\Application
  */
 interface MiddlewareAggregator
 {

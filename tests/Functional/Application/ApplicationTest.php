@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Tests\Functional\Application;
+namespace Sergonie\Tests\Functional\Application;
 
-use Igni\Application\Application;
-use Igni\Application\Config;
-use Igni\Application\ControllerAggregator;
-use Igni\Application\Exception\ApplicationException;
-use Igni\Application\Http\MiddlewareAggregator;
-use Igni\Application\Listeners\OnBootListener;
-use Igni\Application\Providers\ControllerProvider;
-use Igni\Application\Providers\MiddlewareProvider;
-use Igni\Tests\Fixtures\NullApplication;
+use Sergonie\Application\Application;
+use Sergonie\Application\Config;
+use Sergonie\Application\ControllerAggregator;
+use Sergonie\Application\Exception\ApplicationException;
+use Sergonie\Application\Http\MiddlewareAggregator;
+use Sergonie\Application\Listeners\OnBootListener;
+use Sergonie\Application\Providers\ControllerProvider;
+use Sergonie\Application\Providers\MiddlewareProvider;
+use Sergonie\Tests\Fixtures\NullApplication;
 use PHPUnit\Framework\TestCase;
 
 final class ApplicationTest extends TestCase

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Providers;
+namespace Sergonie\Application\Providers;
 
-use Igni\Application\Http\MiddlewareAggregator;
+use Sergonie\Application\Http\MiddlewareAggregator;
 
 /**
  * Allows modules to provide additional psr-15 compatible middleware.

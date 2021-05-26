@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Providers;
+namespace Sergonie\Application\Providers;
 
 use Sergonie\Container\ServiceLocator;
 use Psr\Container\ContainerInterface;
@@ -8,7 +8,7 @@ use Psr\Container\ContainerInterface;
 /**
  * Can be implemented by module to register additional services.
  *
- * @package Igni\Application\Providers
+ * @package Sergonie\Application\Providers
  */
 interface ServiceProvider
 {

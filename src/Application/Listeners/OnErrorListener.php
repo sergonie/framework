@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Listeners;
+namespace Sergonie\Application\Listeners;
 
-use Igni\Application\Application;
+use Sergonie\Application\Application;
 
 use Throwable;
 
@@ -11,7 +11,7 @@ use Throwable;
  * overridden by the handler - this can be useful when there is requirement for
  * displaying custom responses when given exception occurs.
  *
- * @package Igni\Application\Listeners
+ * @package Sergonie\Application\Listeners
  */
 interface OnErrorListener
 {

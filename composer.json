@@ -1,5 +1,5 @@
 {
-  "name": "igniphp/framework",
+  "name": "sergonie/framework",
   "description": "Swoole, PSR-7, PSR-15 modular micro anti-framework.",
   "keywords": [
     "swoole",
@@ -11,13 +11,17 @@
     "framework"
   ],
   "support": {
-    "issues": "https://github.com/igniphp/framework/issues"
+    "issues": "https://github.com/sergonie/framework/issues"
   },
   "license": "MIT",
   "authors": [
     {
       "name": "Dawid <krac> Kraczkowski",
       "email": "dawid.kraczkowski@gmail.com"
+    },
+    {
+      "name": "Sergey <sergonie> Tarasenko",
+      "email": "s.s.tarasenko@gmail.com"
     }
   ],
   "scripts": {
@@ -48,12 +52,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Igni\\": "src/"
+      "Sergonie\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Igni\\Tests\\": "tests/"
+      "Sergonie\\Tests\\": "tests/"
     }
   },
   "config": {

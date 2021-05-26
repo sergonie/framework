@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Listeners;
+namespace Sergonie\Application\Listeners;
 
-use Igni\Application\Application;
+use Sergonie\Application\Application;
 
 /**
  * Can be implemented by module to perform clean-up tasks.
  *
- * @package Igni\Application\Listeners
+ * @package Sergonie\Application\Listeners
  */
 interface OnShutDownListener
 {

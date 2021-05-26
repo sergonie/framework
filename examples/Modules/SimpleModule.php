@@ -2,9 +2,9 @@
 namespace Examples\Modules;
 
 use Examples\Controllers\GoodbyeController;
-use Igni\Application\ControllerAggregator;
-use Igni\Application\HttpApplication;
-use Igni\Application\Providers\ControllerProvider;
+use Sergonie\Application\ControllerAggregator;
+use Sergonie\Application\HttpApplication;
+use Sergonie\Application\Providers\ControllerProvider;
 use Sergonie\Network\Http\Response;
 use Sergonie\Network\Http\Route;
 use Psr\Http\Message\ServerRequestInterface;

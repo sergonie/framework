@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Http;
+namespace Sergonie\Application\Http;
 
-use Igni\Application\Controller as IgniApplicationController;
+use Sergonie\Application\Controller as ApplicationController;
 use Sergonie\Network\Http\Route;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,9 +13,9 @@ use Psr\Http\Message\ServerRequestInterface;
  * Because php does not support generic types, empty interface should be good enough
  * to provide consistency in the application flow for controller handling.
  *
- * @package Igni\Application
+ * @package Sergonie\Application
  */
-interface Controller extends IgniApplicationController
+interface Controller extends ApplicationController
 {
     public function __invoke(ServerRequestInterface $request): ResponseInterface;
 

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Exception;
+namespace Sergonie\Application\Exception;
 
-use Igni\Application\Controller;
+use Sergonie\Application\Controller;
 use Igni\Exception\RuntimeException;
 
 class ApplicationException extends RuntimeException

@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Providers;
+namespace Sergonie\Application\Providers;
 
-use Igni\Application\Config;
+use Sergonie\Application\Config;
 
 /**
  * Can be implemented by module to provide additional configuration
  * for application.
  *
- * @package Igni\Application\Providers
+ * @package Sergonie\Application\Providers
  */
 interface ConfigProvider
 {

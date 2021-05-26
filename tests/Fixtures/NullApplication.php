@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Tests\Fixtures;
+namespace Sergonie\Tests\Fixtures;
 
-use Igni\Application\Controller;
-use Igni\Application\ControllerAggregator;
-use Igni\Application\Http\MiddlewareAggregator;
-use Igni\Application\HttpApplication;
+use Sergonie\Application\Controller;
+use Sergonie\Application\ControllerAggregator;
+use Sergonie\Application\Http\MiddlewareAggregator;
+use Sergonie\Application\HttpApplication;
 use Sergonie\Container\ServiceLocator;
 use Sergonie\Network\Server\HttpServer;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application\Exception;
+namespace Sergonie\Application\Exception;
 
 use Psr\Http\Message\ResponseInterface;
 use Serializable;

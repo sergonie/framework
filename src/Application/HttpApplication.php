@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application;
+namespace Sergonie\Application;
 
-use Igni\Application\Exception\ApplicationException;
-use Igni\Application\Exception\ControllerException;
-use Igni\Application\Http\Controller;
-use Igni\Application\Http\MiddlewareAggregator;
-use Igni\Application\Http\GenericRouter;
-use Igni\Application\Providers\MiddlewareProvider;
+use Sergonie\Application\Exception\ApplicationException;
+use Sergonie\Application\Exception\ControllerException;
+use Sergonie\Application\Http\Controller;
+use Sergonie\Application\Http\MiddlewareAggregator;
+use Sergonie\Application\Http\GenericRouter;
+use Sergonie\Application\Providers\MiddlewareProvider;
 use Sergonie\Network\Http\Middleware\CallableMiddleware;
 use Sergonie\Network\Http\Middleware\ErrorMiddleware;
 use Sergonie\Network\Http\Middleware\MiddlewarePipe;
@@ -28,7 +28,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
 /**
- * @package Igni\Application
+ * @package Sergonie\Application
  */
 class HttpApplication extends Application implements
     ControllerAggregator,
@@ -131,7 +131,7 @@ class HttpApplication extends Application implements
     }
 
     /**
-     * @param  callable|\Igni\Application\Controller|string  $controller
+     * @param  callable|\Sergonie\Application\Controller|string  $controller
      * @param  \Sergonie\Network\Http\Route|null  $route
      */
     public function register($controller, Route $route = null): void

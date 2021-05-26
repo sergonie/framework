@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Tests\Functional\Http;
+namespace Sergonie\Tests\Functional\Http;
 
-use Igni\Application\Http\GenericRouter;
+use Sergonie\Application\Http\GenericRouter;
 use Sergonie\Network\Exception\RouterException;
 use Sergonie\Network\Http\Route;
 use Sergonie\Network\Http\Router;

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Tests\Fixtures\Modules;
+namespace Sergonie\Tests\Fixtures\Modules;
 
-use Igni\Application\Providers\ServiceProvider;
+use Sergonie\Application\Providers\ServiceProvider;
 use Sergonie\Container\ServiceLocator;
 use Psr\Container\ContainerInterface;
 

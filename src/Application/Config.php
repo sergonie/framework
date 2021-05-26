@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Application;
+namespace Sergonie\Application;
 
-use Igni\Application\Exception\ConfigException;
+use Sergonie\Application\Exception\ConfigException;
 
 /**
  * Application's config container.
@@ -16,7 +16,7 @@ use Igni\Application\Exception\ConfigException;
  * $config->set('some.key', true);
  * $some = $config->get('some'); // returns ['key' => true]
  *
- * @package Igni\Application
+ * @package Sergonie\Application
  */
 class Config
 {

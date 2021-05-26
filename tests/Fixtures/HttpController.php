@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Tests\Fixtures;
+namespace Sergonie\Tests\Fixtures;
 
-use Igni\Application\Http\Controller;
+use Sergonie\Application\Http\Controller;
 use Sergonie\Network\Http\Route;
 use Sergonie\Network\Http\Response;
 use Sergonie\Network\Http\Route as IgniNetworkHttpRoute;

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Tests\Functional\Application;
+namespace Sergonie\Tests\Functional\Application;
 
-use Igni\Application\Config;
-use Igni\Application\Exception\ConfigException;
+use Sergonie\Application\Config;
+use Sergonie\Application\Exception\ConfigException;
 use PHPUnit\Framework\TestCase;
 
 final class ConfigTest extends TestCase

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Tests\Fixtures;
+namespace Sergonie\Tests\Fixtures;
 
-use Igni\Application\Controller;
-use IgniTest\Fixtures\Boo;
+use Sergonie\Application\Controller;
+use SergonieTest\Fixtures\Boo;
 
 class SampleController implements Controller
 {

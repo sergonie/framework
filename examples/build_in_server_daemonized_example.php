@@ -6,7 +6,7 @@ require_once __DIR__.'/../vendor/autoload.php';
  * To kill process simply run from the terminal: kill -9 `cat ./igni.pid`.
  */
 
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 use Sergonie\Network\Http\Response;
 use Sergonie\Network\Server\Configuration;
 use Sergonie\Network\Server\HttpServer;

@@ -57,7 +57,7 @@ Following example shows how you can use Igni without build in webserver:
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 use Igni\Network\Http\Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -83,7 +83,7 @@ Similar approach is taken when build-in server comes in place:
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 use Igni\Network\Http\Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -163,7 +163,7 @@ Full example:
 // Include composer's autoloader.
 require_once __DIR__.'/vendor/autoload.php';
 
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 use Igni\Network\Http\Response;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -248,7 +248,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 
 class BenchmarkMiddleware implements MiddlewareInterface
 {
@@ -289,26 +289,26 @@ The following list contains all possible interfaces that module can implement in
 features for the application:
 
  - Listeners:
-    - `Igni\Application\Listeners\OnBootListener`
-    - `Igni\Application\Listeners\OnErrorListener`
-    - `Igni\Application\Listeners\OnRunListener`
-    - `Igni\Application\Listeners\OnShutdownListener`
+    - `Sergonie\Application\Listeners\OnBootListener`
+    - `Sergonie\Application\Listeners\OnErrorListener`
+    - `Sergonie\Application\Listeners\OnRunListener`
+    - `Sergonie\Application\Listeners\OnShutdownListener`
  - Providers:
-    - `Igni\Application\Providers\ConfigProvider` 
-    - `Igni\Application\Providers\ControllerProvider` 
-    - `Igni\Application\Providers\ServiceProvider` 
-    - `Igni\Application\Providers\MiddlewareProvider` 
+    - `Sergonie\Application\Providers\ConfigProvider` 
+    - `Sergonie\Application\Providers\ControllerProvider` 
+    - `Sergonie\Application\Providers\ServiceProvider` 
+    - `Sergonie\Application\Providers\MiddlewareProvider` 
 
 Example:
 ```php
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
-use Igni\Application\ControllerAggregator;
-use Igni\Application\Providers\ControllerProvider;
+use Sergonie\Application\ControllerAggregator;
+use Sergonie\Application\Providers\ControllerProvider;
 use Igni\Network\Http\Response;
 use Igni\Network\Http\Route;
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 
 /**
  * Module definition.
@@ -348,7 +348,7 @@ Can be used for cleaning-up tasks.
 ### Providers
 
 #### Config Provider
-Config provider is used to provide additional configuration settings to config service `\Igni\Application\Config`.  
+Config provider is used to provide additional configuration settings to config service `\Sergonie\Application\Config`.  
 
 #### Controller Provider
 Controller provider is used to register controllers within the application.  
@@ -378,7 +378,7 @@ require_once __DIR__.'/vendor/autoload.php';
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Igni\Network\Http\Route;
-use Igni\Application\Http\Controller;
+use Sergonie\Application\Http\Controller;
 use Igni\Network\Http\Response;
 
 class WelcomeUserController implements Controller
@@ -455,7 +455,7 @@ require_once __DIR__.'/vendor/autoload.php';
 use Igni\Network\Exception\HttpException;
 use Psr\Http\Message\ResponseInterface;
 use Igni\Network\Http\Response;
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 
 class NotFoundException extends \RuntimeException implements HttpException
 {
@@ -493,7 +493,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Igni\Network\Http\Response;
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 
 class CustomErrorHandler implements MiddlewareInterface
 {
@@ -529,7 +529,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Igni\Network\Http\Route;
-use Igni\Application\Http\Controller;
+use Sergonie\Application\Http\Controller;
 use Igni\Network\Http\Response;
 use Igni\Network\Http\ServerRequest;
 
@@ -586,9 +586,9 @@ to any of your modules and build your container in the provided method:
 // Include composer's autoloader.
 require_once __DIR__.'/vendor/autoload.php';
 
-use Igni\Application\Application;
-use Igni\Application\Providers\ServiceProvider;
-use Igni\Application\Listeners\OnRunListener;
+use Sergonie\Application\Application;
+use Sergonie\Application\Providers\ServiceProvider;
+use Sergonie\Application\Listeners\OnRunListener;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -611,7 +611,7 @@ class SymfonyDependencyInjectionModule implements ServiceProvider, OnRunListener
 }
 
 $containerBuilder = new ContainerBuilder();
-$application = new Igni\Application\HttpApplication($containerBuilder);
+$application = new Sergonie\Application\HttpApplication($containerBuilder);
 $application->use(new SymfonyDependencyInjectionModule());
 
 // Run the application.
@@ -624,7 +624,7 @@ $application->run();
 <?php
 require_once __DIR__.'/vendor/autoload.php';
 
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 use Igni\Network\Http\Response;
 use Igni\Network\Server\HttpServer;
 use Psr\Http\Message\ResponseInterface;
@@ -719,7 +719,7 @@ PHP ships with a built-in webserver for development. This server allows you to r
 require_once __DIR__.'/vendor/autoload.php';
 
 use Igni\Network\Http\Response;
-use Igni\Application\HttpApplication;
+use Sergonie\Application\HttpApplication;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
