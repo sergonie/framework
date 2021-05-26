@@ -3,7 +3,7 @@
 namespace Igni\Application\Http;
 
 use Igni\Application\Controller as IgniApplicationController;
-use Igni\Network\Http\Route;
+use Sergonie\Network\Http\Route;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

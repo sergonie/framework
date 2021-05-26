@@ -3,9 +3,9 @@
 namespace Igni\Tests\Fixtures;
 
 use Igni\Application\Http\Controller;
-use Igni\Network\Http\Route;
-use Igni\Network\Http\Response;
-use Igni\Network\Http\Route as IgniNetworkHttpRoute;
+use Sergonie\Network\Http\Route;
+use Sergonie\Network\Http\Response;
+use Sergonie\Network\Http\Route as IgniNetworkHttpRoute;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

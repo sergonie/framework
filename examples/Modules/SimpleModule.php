@@ -5,8 +5,8 @@ use Examples\Controllers\GoodbyeController;
 use Igni\Application\ControllerAggregator;
 use Igni\Application\HttpApplication;
 use Igni\Application\Providers\ControllerProvider;
-use Igni\Network\Http\Response;
-use Igni\Network\Http\Route;
+use Sergonie\Network\Http\Response;
+use Sergonie\Network\Http\Route;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**

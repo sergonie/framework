@@ -2,9 +2,9 @@
 
 namespace Igni\Application\Http;
 
-use Igni\Network\Http\Router;
-use Igni\Network\Exception\RouterException;
-use Igni\Network\Http\Route;
+use Sergonie\Network\Http\Router;
+use Sergonie\Network\Exception\RouterException;
+use Sergonie\Network\Http\Route;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException as SymfonyMethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcher;

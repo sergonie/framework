@@ -3,8 +3,8 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Examples\Modules\SimpleModule;
 use Igni\Application\HttpApplication;
-use Igni\Network\Server\Configuration;
-use Igni\Network\Server\HttpServer;
+use Sergonie\Network\Server\Configuration;
+use Sergonie\Network\Server\HttpServer;
 
 
 // Autoloader.

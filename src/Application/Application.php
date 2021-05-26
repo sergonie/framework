@@ -11,8 +11,8 @@ use Igni\Application\Listeners\OnShutDownListener;
 use Igni\Application\Providers\ConfigProvider;
 use Igni\Application\Providers\ControllerProvider;
 use Igni\Application\Providers\ServiceProvider;
-use Igni\Container\DependencyResolver;
-use Igni\Container\ServiceLocator;
+use Sergonie\Container\DependencyResolver;
+use Sergonie\Container\ServiceLocator;
 use Psr\Container\ContainerInterface;
 use Throwable;
 

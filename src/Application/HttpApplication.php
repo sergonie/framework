@@ -8,16 +8,16 @@ use Igni\Application\Http\Controller;
 use Igni\Application\Http\MiddlewareAggregator;
 use Igni\Application\Http\GenericRouter;
 use Igni\Application\Providers\MiddlewareProvider;
-use Igni\Network\Http\Middleware\CallableMiddleware;
-use Igni\Network\Http\Middleware\ErrorMiddleware;
-use Igni\Network\Http\Middleware\MiddlewarePipe;
-use Igni\Network\Http\Response;
-use Igni\Network\Http\Route;
-use Igni\Network\Http\Router;
-use Igni\Network\Http\ServerRequest;
-use Igni\Network\Server\Client;
-use Igni\Network\Server\HttpServer;
-use Igni\Network\Server\OnRequestListener;
+use Sergonie\Network\Http\Middleware\CallableMiddleware;
+use Sergonie\Network\Http\Middleware\ErrorMiddleware;
+use Sergonie\Network\Http\Middleware\MiddlewarePipe;
+use Sergonie\Network\Http\Response;
+use Sergonie\Network\Http\Route;
+use Sergonie\Network\Http\Router;
+use Sergonie\Network\Http\ServerRequest;
+use Sergonie\Network\Server\Client;
+use Sergonie\Network\Server\HttpServer;
+use Sergonie\Network\Server\OnRequestListener;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Psr\Container\ContainerInterface;
@@ -132,7 +132,7 @@ class HttpApplication extends Application implements
 
     /**
      * @param  callable|\Igni\Application\Controller|string  $controller
-     * @param  \Igni\Network\Http\Route|null  $route
+     * @param  \Sergonie\Network\Http\Route|null  $route
      */
     public function register($controller, Route $route = null): void
     {

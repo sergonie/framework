@@ -3,7 +3,7 @@
 namespace Igni\Tests\Fixtures\Modules;
 
 use Igni\Application\Providers\ServiceProvider;
-use Igni\Container\ServiceLocator;
+use Sergonie\Container\ServiceLocator;
 use Psr\Container\ContainerInterface;
 
 class ExampleModuleB implements ServiceProvider

@@ -2,7 +2,7 @@
 
 namespace Igni\Application\Providers;
 
-use Igni\Container\ServiceLocator;
+use Sergonie\Container\ServiceLocator;
 use Psr\Container\ContainerInterface;
 
 /**

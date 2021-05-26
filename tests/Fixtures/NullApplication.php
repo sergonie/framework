@@ -6,8 +6,8 @@ use Igni\Application\Controller;
 use Igni\Application\ControllerAggregator;
 use Igni\Application\Http\MiddlewareAggregator;
 use Igni\Application\HttpApplication;
-use Igni\Container\ServiceLocator;
-use Igni\Network\Server\HttpServer;
+use Sergonie\Container\ServiceLocator;
+use Sergonie\Network\Server\HttpServer;
 use Psr\Http\Server\MiddlewareInterface;
 
 class NullApplication extends HttpApplication

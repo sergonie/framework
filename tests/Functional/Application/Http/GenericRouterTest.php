@@ -3,9 +3,9 @@
 namespace Igni\Tests\Functional\Http;
 
 use Igni\Application\Http\GenericRouter;
-use Igni\Network\Exception\RouterException;
-use Igni\Network\Http\Route;
-use Igni\Network\Http\Router;
+use Sergonie\Network\Exception\RouterException;
+use Sergonie\Network\Http\Route;
+use Sergonie\Network\Http\Router;
 use PHPUnit\Framework\TestCase;
 
 final class GenericRouterTest extends TestCase
