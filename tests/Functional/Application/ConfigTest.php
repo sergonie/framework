@@ -2,12 +2,20 @@
 
 namespace Sergonie\Tests\Functional\Application;
 
+use PHPUnit\Framework\TestCase;
 use Sergonie\Application\Config;
 use Sergonie\Application\Exception\ConfigException;
-use PHPUnit\Framework\TestCase;
 
 final class ConfigTest extends TestCase
 {
+    public function cacheValuesDP(): array
+    {
+        return [
+            'with cache' => [true],
+            'without cache' => [false],
+        ];
+    }
+
     public function testCanInstantiate(): void
     {
         $config = new Config();
@@ -26,23 +34,27 @@ final class ConfigTest extends TestCase
         self::assertSame($value, $config->get('test'));
     }
 
-    public function testNestingValues(): void
+    /** @dataProvider cacheValuesDP */
+    public function testNestingValues(bool $use_cache): void
     {
-        $config = new Config();
+        $config = new Config([], $use_cache);
 
-        $config->set('test.a', 1);
-        self::assertEquals(['a' => 1], $config->get('test'));
-        self::assertSame(1, $config->get('test.a'));
+        $config->set('test.a.b', 1);
+        $config->set('test.a.c', null);
+        self::assertEquals(['a' => ['b' => 1, 'c' => null]], $config->get('test'));
+        self::assertSame(1, $config->get('test.a.b'));
+        self::assertNull($config->get('test.a.c'));
     }
 
-    public function testConfigMerge(): void
+    /** @dataProvider cacheValuesDP */
+    public function testConfigMerge(bool $use_cache): void
     {
         $a = new Config([
-           'testA' => [
-               'a' => 1,
-           ],
-           'testB' => 'b'
-        ]);
+            'testA' => [
+                'a' => 1,
+            ],
+            'testB' => 'b'
+        ], $use_cache);
 
         $b = new Config([
             'testA' => [
@@ -50,7 +62,7 @@ final class ConfigTest extends TestCase
             ],
             'testB' => 'c',
             'testC' => 2
-        ]);
+        ], $use_cache);
 
         $a->merge($b);
 
@@ -139,17 +151,21 @@ final class ConfigTest extends TestCase
     public function testToFlatArray(): void
     {
         $config = new Config();
-        $config->set('a.b.c' , 1);
+        $config->set('a.b.c', 1);
         $config->set('b.c', 2);
         $config->set('b.d', 2.1);
-        $config->set('c', 3);
+        $config->set('c', []);
+        $config->set('c.d', ['e' => 1, 'f' => ['g' => 2]]);
+        $config->set('c.d.f.h', 10);
 
         self::assertSame(
             [
                 'a.b.c' => 1,
                 'b.c' => 2,
                 'b.d' => 2.1,
-                'c' => 3,
+                'c.d.e' => 1,
+                'c.d.f.g' => 2,
+                'c.d.f.h' => 10,
             ],
             $config->toFlatArray()
         );

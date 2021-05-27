@@ -1,0 +1,56 @@
+#!/usr/local/bin/php
+<?php
+
+use Sergonie\Application\Config;
+
+require __DIR__ . "/../vendor/autoload.php";
+
+const DEPTH = 1000;
+const ROOTS = 100;
+
+function makeKey(string $root, int $depth = DEPTH): string
+{
+    return $root . str_repeat('.sub_key', $depth);
+}
+
+function runBench(Config $config): void
+{
+    //set bench
+    $time_sum = 0.0;
+    for ($i = 0; $i < ROOTS; $i++) {
+        $key = makeKey('root' . $i);
+
+        $start = microtime(true);
+        $config->set($key, 1);
+        $end = microtime(true);
+
+        $time_sum += ($end - $start);
+    }
+
+    echo sprintf('Config::set : %fms', $time_sum / ROOTS) . "\n";
+
+    //get bench
+    $time_sum = 0.0;
+    for ($i = 0; $i < ROOTS; $i++) {
+        $key = makeKey('root' . $i);
+
+        $start = microtime(true);
+        $config->get($key);
+        $end = microtime(true);
+
+        $time_sum += ($end - $start);
+    }
+
+    echo sprintf('Config::get : %fms', $time_sum / ROOTS) . "\n";
+}
+
+//bench without cache
+echo "Without cache option: \n";
+runBench(new Config([], false));
+
+echo "\nWith cache option: \n";
+runBench(new Config([], true));
+
+
+
+

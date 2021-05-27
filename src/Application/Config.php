@@ -21,15 +21,28 @@ use Sergonie\Application\Exception\ConfigException;
 class Config
 {
     private array $config;
+    protected bool $cache;
+    protected array $cache_map = [];
 
-    /**
-     * Config constructor.
-     *
-     * @param array $config
-     */
-    public function __construct(array $config = [])
+    public function __construct(array $config = [], bool $use_cache = true)
     {
         $this->config = $config;
+        $this->cache = $use_cache;
+        $this->makeCacheMap();
+    }
+
+    protected function makeCacheMap(): void
+    {
+        if ($this->cache) {
+            $this->cache_map = $this->toFlatArray();
+        }
+    }
+
+    protected function setCacheMapVal(string $key, $val): void
+    {
+        if ($this->cache) {
+            $this->cache_map[$key] = $val;
+        }
     }
 
     /**
@@ -40,29 +53,34 @@ class Config
      */
     public function has(string $key): bool
     {
-        return $this->lookup($key) !== null;
+        return !is_null($this->lookup($key));
     }
 
     /**
-     * @todo: optimize me
-     * @param  string  $key
+     * @param string $key
      *
      * @return array|mixed|null
      */
     private function lookup(string $key)
     {
+        if ($this->cache && array_key_exists($key, $this->cache_map)) {
+            return $this->cache_map[$key];
+        }
+
         $result = $this->config;
         $keys = explode('.', $key);
         if (!is_array($keys)) {
             return null;
         }
 
-        foreach($keys as $part) {
-            if (!is_array($result) || !isset($result[$part])) {
+        foreach ($keys as $part) {
+            if (!is_array($result) || !array_key_exists($part, $result)) {
                 return null;
             }
             $result = $result[$part];
         }
+
+        $this->setCacheMapVal($key, $result);
 
         return $result;
     }
@@ -91,6 +109,7 @@ class Config
     public function merge(Config $config): Config
     {
         $this->config = array_merge_recursive($this->config, $config->config);
+        $this->makeCacheMap();
 
         return $this;
     }
@@ -109,7 +128,7 @@ class Config
             throw ConfigException::forExtractionFailure($namespace);
         }
 
-        return new self($extracted);
+        return new self($extracted, $this->cache);
     }
 
     /**
@@ -131,12 +150,14 @@ class Config
         $result = &$this->config;
 
         foreach ($keys as $part) {
-            if (!isset($result[$part]) || !is_array($result[$part])) {
+            if (!array_key_exists($part, $result) || !is_array($result[$part])) {
                 $result[$part] = [];
             }
             $result = &$result[$part];
         }
         $result[$last] = $value;
+
+        $this->setCacheMapVal($key, $value);
     }
 
     /**
@@ -177,18 +198,17 @@ class Config
 
     private function fetchConstants($value)
     {
-        if (!is_string($value)) {
-            return $value;
-        }
-        return preg_replace_callback(
-            '#\$\{([^{}]*)\}#',
-            static function ($matches) {
-                if (defined($matches[1])) {
-                    return constant($matches[1]);
-                }
-                return $matches[0];
-            },
-            $value
-        );
+        return !is_string($value)
+            ? $value
+            : preg_replace_callback(
+                '#\$\{([^{}]*)\}#',
+                static function ($matches) {
+                    if (defined($matches[1])) {
+                        return constant($matches[1]);
+                    }
+                    return $matches[0];
+                },
+                $value
+            );
     }
 }
